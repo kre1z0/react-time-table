@@ -1,0 +1,111 @@
+@import "variables";
+
+@media (max-width: $sm-min) {
+  .TableWidget {
+    margin: 0 auto;
+    padding: 10px 15px;
+    width: 100%;
+    max-width: $sm-min - 10px;
+    .week_days_block {
+      display: none;
+    }
+    .table-flex {
+      width: 100%;
+      .mobile_week_day {
+        display: block;
+        position: relative;
+        width: 100%;
+        &:before {
+          width: 100%;
+          top: 50%;
+          left: 0;
+          content: '';
+          display: block;
+          position: absolute;
+          border: 1px solid darken($gray, 24%);
+        }
+        .line {
+          padding: 0 4px;
+          position: relative;
+          color: darken($gray, 24%);
+          display: inline-block;
+          background-color: #F1F1F1;
+        }
+      }
+      .row {
+        height: 36px;
+        .schedule {
+          padding: 0 4px;
+        }
+        &.header {
+          margin-bottom: 10px;
+        }
+      } 
+    }
+  }
+  .table_time_wrapper {
+    .timetable_header-sub h4 {
+      padding: 10px 0;
+    }
+    .timetable_header{
+      padding: 0;
+      h1 {
+        display: block;
+        transform: none;
+        font-size: 2em;
+        padding-bottom: 15px;
+      }
+      .button_out_of_call {
+        float: none;
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+  .popup .popup__container .are_you_sure {
+    padding: 0 10px;
+  }
+}
+@media (max-width: $xs-min) {
+  .table_time_wrapper {
+    .timetable_header{
+      h1 {
+        font-size: 1.4em;
+      }
+    }
+    .table-flex {
+      width: 100%;
+      .row {
+        height: 36px;
+        &.header {
+          margin-bottom: 10px;
+        }
+        .cell {
+          width: calc(100% / 12);
+          &:nth-child(even) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  .form {
+    .formHeader {
+      font-size: 1.4em;
+      padding-bottom: 30px;
+    }
+  }
+  .InputRange-slider {
+    margin-top: -1.1rem;
+    width: 2rem;
+    height: 2rem;
+  }
+  .InputRange-track {
+    height: 0.4rem;
+  }
+  .popup .popup__container .popup_buttons_container {
+    padding-top: 2em;
+  }
+}
+
+

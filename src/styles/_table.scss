@@ -1,0 +1,171 @@
+@import "vendor/normalize";
+@import "variables";
+
+* {
+  box-sizing: border-box;
+}
+
+.table_time_wrapper {
+  background-color: #F1F1F1;
+  .timetable_header {
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+    h1 {
+      display: inline-block;
+      margin: 0 auto;
+      color: darken($gray, 24%);
+      font-weight: 300;
+      transform: translateX(80px);
+    }
+    .button_out_of_call {
+      float: right;
+      padding: 0 44px;
+      display: inline-block;
+      font-family: Roboto, sans-serif;
+      text-decoration: none;
+      outline: none;
+      height: 37px;
+      line-height: 37px;
+      transition: background 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      user-select: none;
+      border: none;
+      color: $white;
+      border-radius: 4px;
+      background:  $light-red;
+      text-transform: none;
+      font-weight: 500;
+      font-size: 15px;
+      cursor: pointer;
+      &:hover {
+        background-color: lighten($light-red, 7%);
+      }
+      &.disabled {
+        background: lighten($gray, 22%);
+        cursor: no-drop;
+        &:hover {
+          background: lighten($gray, 22%);
+        }
+      }
+    }
+  }
+  .timetable_header-sub {
+    h4 {
+      padding: 15px 0;
+      color: darken($gray, 33%);
+      font-weight: 300;
+      text-align: center;
+      margin: 0;
+    }
+  }
+}
+
+.time_table_body {
+  display: flex;
+  align-items: flex-end;
+  font-family: Roboto, sans-serif;
+  text-align: center;
+}
+
+.TableWidget {
+  margin: 0 auto;
+  padding: 10px 15px;
+  width: 1000px;
+  .week_days_block {
+    width: 15%;
+    cursor: default;
+    color: darken($gray, 44%);
+    font-size: 1.2rem;
+    text-align: left;
+    font-weight: 300;
+    .row  {
+      height: 44px;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      .vertical_align {
+        display: inline-block;
+        width: 100%;
+      }
+    }
+  }
+  .table-flex {
+    width: 85%;
+    text-align: center;
+    color: $gray;
+    .mobile_week_day {
+      display: none;
+    }
+    .row {
+      width: 100%;
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      height: 44px;
+      align-items: center;
+      .schedule {
+        margin-top: -10px;
+        line-height: 20px;
+        height: 20px;
+        font-size: 13px;
+        top: 50%;
+        z-index: 1;
+        overflow: hidden;
+        position: absolute;
+        background: $green;
+        cursor: pointer;
+        color: $white;
+        border-radius: 10px;
+        transition: all 0.7s ease;
+        &.example-leave {
+          opacity: 1;
+          background-color: $light-red;
+        }
+        &.example-enter {
+          opacity: 0;
+        }
+        &.example-enter.example-enter-active {
+          opacity: 1;
+        }
+        &.example-leave.example-leave-active {
+          opacity: 0;
+        }
+        &:hover {
+          background: lighten($green, 7%);
+        }
+      }
+      .cell {
+        width: calc(100% / 24);
+        height: 20px;
+        &:hover {
+          cursor: pointer;
+          .circle {
+            transform: scale(1.3);
+            box-shadow: 0 0 0 4px #aaaaaa;
+          }
+        }
+        .circle {
+          transition: all 750ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background-color: $gray;
+          display: inline-block;
+        }
+      }
+      &.header {
+        .cell {
+          cursor: default;
+        }
+        .header_scale {
+          font-weight: 300;
+          font-size: .75rem;
+          display: block;
+        }
+      }
+    }
+  }
+}
