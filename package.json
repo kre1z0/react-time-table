@@ -1,7 +1,7 @@
 {
-  "name": "schedules",
+  "name": "timetable",
   "version": "1.0.0",
-  "description": "date widget",
+  "description": "timetable widget",
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./src",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/kre1z0/timetable.git"
   },
   "author": "Igor Ivchuk <thekreizo@gmail.com>",
   "license": "MIT",
@@ -21,6 +21,7 @@
     "moment-timezone": "^0.5.9",
     "react": "^15.3.1",
     "react-addons-css-transition-group": "^15.4.0",
+    "react-click-outside": "github:tj/react-click-outside",
     "react-dom": "^15.3.1",
     "react-input-range": "^0.9.3",
     "shortid": "^2.2.6",

@@ -3,6 +3,8 @@ import React, { Component, PropTypes } from 'react'
 import 'whatwg-fetch'
 // https://github.com/dylang/shortid
 import shortid from 'shortid'
+// https://github.com/tj/react-click-outside
+import ClickOutside from 'react-click-outside'
 // http://momentjs.com/
 import moment from 'moment-timezone'
 // https://github.com/davidchin/react-input-range
@@ -46,16 +48,13 @@ export default class Popup extends Component {
       weekDay: '',
     }
   }
-
   componentDidMount() {
     document.addEventListener('keydown', this.onEscKeyDown)
   }
-
   onClickDeleteSchedule() {
     this.props.deleteSchedule(this.state.id)
     this.onClickClosePopup()
   }
-
   onClickClosePopup() {
     this.setState(
       {
@@ -88,7 +87,6 @@ export default class Popup extends Component {
 
   onEscKeyDown(e) {
     const ESC = 27
-
     if (e.keyCode === ESC) {
       this.onClickClosePopup()
     }
@@ -203,14 +201,16 @@ export default class Popup extends Component {
     return (
       <div>
         <div className={popUpClass} >
-          <div className='popup__container' >
-            {deleteAll}
-            {newSchedule}
-            {editSchedule}
-            <button onClick={this.onClickClosePopup} className='button popup__close' >
-              ×
-            </button>
-          </div>
+            <div className='popup__container' >
+              <ClickOutside onClickOutside={this.onClickClosePopup}>
+              {deleteAll}
+              {newSchedule}
+              {editSchedule}
+              <button onClick={this.onClickClosePopup} className='button popup__close' >
+                ×
+              </button>
+              </ClickOutside>
+            </div>
         </div>
       </div>
     )
