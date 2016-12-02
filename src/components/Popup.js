@@ -151,8 +151,8 @@ export default class Popup extends Component {
           </div>
           <InputRange
             onChange={this.onChangeValues}
-            minValue={0}
-            maxValue={48}
+            minValue={state.validationValues.min}
+            maxValue={state.validationValues.max}
             value={state.values}
           />
         </div>
@@ -201,16 +201,16 @@ export default class Popup extends Component {
     return (
       <div>
         <div className={popUpClass} >
-            <div className='popup__container' >
-              <ClickOutside onClickOutside={this.onClickClosePopup}>
+          <div className='popup__container' >
+            <ClickOutside onClickOutside={this.onClickClosePopup}>
               {deleteAll}
               {newSchedule}
               {editSchedule}
               <button onClick={this.onClickClosePopup} className='button popup__close' >
-                ×
+               ×
               </button>
-              </ClickOutside>
-            </div>
+            </ClickOutside>
+          </div>
         </div>
       </div>
     )

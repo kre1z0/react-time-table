@@ -138,8 +138,13 @@
         }
       }
       .cell {
-        width: calc(100% / 24);
+        width: calc(100% / 25);
         height: 20px;
+        &:first-child {
+          &:hover {
+            cursor: default;
+          }
+        }
         &:hover {
           cursor: pointer;
           .circle {

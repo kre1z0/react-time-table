@@ -12,8 +12,8 @@ export function getScheduleStyle(object) {
   const cellWidth = 100 / 24 / 2
   const max = object.max
   const min = object.min
-  const widthSchedule = (max - min + 1) * cellWidth
-  const leftSchedule = cellWidth * min - 3
+  const widthSchedule = (max - min) * cellWidth
+  const leftSchedule = cellWidth * min
   return {
     scheduleWidth: `${widthSchedule}%`,
     scheduleLeft: `${leftSchedule}%`,
@@ -112,16 +112,17 @@ export function fetchEditscheduleFromServer(schedule) {
   console.log('fetchEditscheduleFromServer', schedule, id, start, end)
 }
 
-// валидация
+// валидация для нового рассписания
 // принимает массив schedules(рассписаний)
 // ↓ отдает массив из начального и конечного значения schedules ↓
-export const getInputValues = (schedules, weekDay, index) => {
+export const getInputValuesForNew = (schedules, weekDay, index) => {
   const array = []
   schedules.forEach((item) => {
     if (item.weekDay === weekDay) {
       array.push(item.values.min, item.values.max)
     }
   })
+  console.log('array', array)
   array.sort((a, b) => a - b)
   const getMin =
     min =>
@@ -138,12 +139,59 @@ export const getInputValues = (schedules, weekDay, index) => {
 
   const min = array.reduce(getMax(index), -Infinity)
   const max = array.reduce(getMin(index), +Infinity)
-  const valueMin = min === -Infinity ? constants.INPUT_RANGE : min
-  const valueMax = max === +Infinity ? constants.INPUT_RANGE_MAX_VALUE : max
+  const valueMin = isFinite(min) ? min : constants.INPUT_RANGE_MIN_VALUE
+  const valueMax = isFinite(max) ? max : constants.INPUT_RANGE_MAX_VALUE
   const values = {
     min: valueMin,
-    max: valueMax - 1,
+    max: valueMax,
   }
   return values
 }
 
+// валидация для редактирования рассписания
+// ↓ отдает массив из начального и конечного значения schedules ↓
+export const getInputValuesForEdit = (schedules, weekDay, id, minValue, maxValue) => {
+  console.log('minValue', minValue)
+  console.log('minValue', maxValue)
+  const array = []
+  schedules.forEach((item) => {
+    if (item.weekDay === weekDay && item.id !== id) {
+      array.push(item.values.min, item.values.max)
+    }
+  })
+  if (schedules.length === 1) {
+    return {
+      min: 0,
+      max: 48,
+    }
+  }
+  const getMin =
+    min =>
+      (acc, val) =>
+        val < acc && val > min || val === min
+          ? val
+          : acc
+  const getMax =
+    max =>
+      (acc, val) =>
+        val > acc && val < max || val === max
+          ? val
+          : acc
+
+  const min = array.reduce(getMax(minValue), -Infinity)
+  const max = array.reduce(getMin(maxValue), +Infinity)
+  console.log('min', min)
+  console.log('max', max)
+  const valueMin = isFinite(min) ? min : constants.INPUT_RANGE_MIN_VALUE
+  const valueMax = isFinite(max) ? max : constants.INPUT_RANGE_MAX_VALUE
+
+  console.log('array', array)
+  console.log('valueMinF', valueMin)
+  console.log('valueMaxF', valueMax)
+
+  const values = {
+    min: valueMin,
+    max: valueMax,
+  }
+  return values
+}

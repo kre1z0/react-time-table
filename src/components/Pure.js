@@ -29,6 +29,9 @@ export const Thead = () => {
   }
   return (
     <div className='row header' >
+      <span className='cell' >
+        <span className='header_scale' />
+      </span>
       {celsAM}
       {celsPM}
     </div>

@@ -62,9 +62,6 @@
       }
     }
   }
-  .popup .popup__container .are_you_sure {
-    padding: 0 10px;
-  }
 }
 @media (max-width: $xs-min) {
   .table_time_wrapper {
@@ -82,6 +79,9 @@
         }
         .cell {
           width: calc(100% / 12);
+          &:first-child {
+            display: none;
+          }
           &:nth-child(even) {
             display: none;
           }
@@ -105,6 +105,9 @@
   }
   .popup .popup__container .popup_buttons_container {
     padding-top: 2em;
+  }
+  .popup .popup__container .are_you_sure {
+    padding: 0 10px;
   }
 }
 

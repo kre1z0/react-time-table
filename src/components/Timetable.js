@@ -41,6 +41,10 @@ class Timetable extends Component {
   onClickSchedule(item) {
     console.log('onClickSchedule ---->', item)
     const component = this.popup
+    const schedules = this.state.schedules
+    const args = [schedules, item.weekDay, item.id, item.values.min, item.values.max]
+    const validationValues = actions.getInputValuesForEdit(...args)
+    console.log('validationValues', validationValues)
     component.setState({
       id: item.id,
       start_at: item.start_at,
@@ -48,11 +52,7 @@ class Timetable extends Component {
       weekDay: item.weekDay,
       popupOpened: true,
       editingSchedule: true,
-      validationValues: {
-        min: 0,
-        max: 48,
-      },
-      mobile: false,
+      validationValues,
       values: {
         min: item.values.min,
         max: item.values.max,
@@ -79,11 +79,11 @@ class Timetable extends Component {
     const inputRange = index * constants.INPUT_RANGE
     const component = this.popup
     const schedules = this.state.schedules
-    const inputValues = actions.getInputValues(schedules, day, inputRange)
+    const validationValues = actions.getInputValuesForNew(schedules, day, inputRange)
     const start = moment(inputRange * constants.HALF_HOUR)
-    const end = moment(inputValues.max * constants.HALF_HOUR)
+    const end = moment(validationValues.max * constants.HALF_HOUR)
 
-    console.log('inputValues', inputValues)
+    console.log('inputValues', validationValues)
     console.log('start', start)
     console.log('end', end)
     const startTime = start.utc().format(constants.FORMAT_DATES)
@@ -96,12 +96,10 @@ class Timetable extends Component {
       weekDay: day,
       start_at: startTime,
       end_at: endTime,
-      validationValues: {
-        inputValues,
-      },
+      validationValues,
       values: {
         min: inputRange,
-        max: inputValues.max,
+        max: validationValues.max,
       },
     })
   }
@@ -186,6 +184,7 @@ class Timetable extends Component {
                           </span>
                         </div>
                         <div className='row'>
+                          <div className='cell' />
                           {cels}
                           <ReactCSSTransitionGroup
                             transitionName='example'
