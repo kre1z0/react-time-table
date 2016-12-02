@@ -1,6 +1,9 @@
 demo - https://kre1z0.github.io/table/
 
-mobile 
+`mobile `
+
 <img src="./src/static/mobile.png" alt="mobile" />
-desctop
+
+`desctop`
+
 <img src="./src/static/desctop.png" alt="mobile" />
