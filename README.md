@@ -1,5 +1,13 @@
-`demo` - https://kre1z0.github.io/table/
+##react-widget-scheduler
 
+Adaptive widget "Schedule for week" 
+
+##Demo
+
+Check demo <a href="https://kre1z0.github.io/table/" target='_blank'>here</a>
+
+
+##Preview
 `mobile `
 
 <img src="./src/static/mobile.png" alt="mobile" />
@@ -7,3 +15,6 @@
 `desctop`
 
 <img src="./src/static/desctop.png" alt="mobile" />
+
+##License
+MIT (c) Igor Ivchuk
