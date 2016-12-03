@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
-export default class Popup extends Component {
+class TimeZone extends Component {
   componentDidMount() {
 
   }
@@ -14,3 +14,4 @@ export default class Popup extends Component {
   }
 }
 
+export default TimeZone

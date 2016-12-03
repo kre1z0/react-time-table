@@ -184,7 +184,7 @@ export default class Popup extends Component {
     if (state.editingSchedule === true) {
       editSchedule = (<div>
         {formField}
-        <div className='popup_buttons_container' >
+        <div className='popup_buttons_container'>
           <button style={styleWidth} onClick={this.onClickDeleteSchedule}
             type='button' className='button popup__button delete'
           >

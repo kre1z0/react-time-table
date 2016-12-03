@@ -114,7 +114,7 @@ export function fetchEditscheduleFromServer(schedule) {
 
 // валидация для нового рассписания
 // принимает массив schedules(рассписаний)
-// ↓ отдает массив из начального и конечного значения schedules ↓
+// ↓ отдает объект из начального и конечного значения schedules ↓
 export const getInputValuesForNew = (schedules, weekDay, index) => {
   const array = []
   schedules.forEach((item) => {
@@ -137,10 +137,8 @@ export const getInputValuesForNew = (schedules, weekDay, index) => {
           ? val
           : acc
 
-  const min = array.reduce(getMax(index), -Infinity)
-  const max = array.reduce(getMin(index), +Infinity)
-  const valueMin = isFinite(min) ? min : constants.INPUT_RANGE_MIN_VALUE
-  const valueMax = isFinite(max) ? max : constants.INPUT_RANGE_MAX_VALUE
+  const valueMin = array.reduce(getMax(index), constants.INPUT_RANGE_MIN_VALUE)
+  const valueMax = array.reduce(getMin(index), constants.INPUT_RANGE_MAX_VALUE)
   const values = {
     min: valueMin,
     max: valueMax,
@@ -149,7 +147,7 @@ export const getInputValuesForNew = (schedules, weekDay, index) => {
 }
 
 // валидация для редактирования рассписания
-// ↓ отдает массив из начального и конечного значения schedules ↓
+// ↓ отдает объект из начального и конечного значения schedules ↓
 export const getInputValuesForEdit = (schedules, weekDay, id, minValue, maxValue) => {
   console.log('minValue', minValue)
   console.log('minValue', maxValue)
@@ -178,13 +176,8 @@ export const getInputValuesForEdit = (schedules, weekDay, id, minValue, maxValue
           ? val
           : acc
 
-  const min = array.reduce(getMax(minValue), -Infinity)
-  const max = array.reduce(getMin(maxValue), +Infinity)
-  console.log('min', min)
-  console.log('max', max)
-  const valueMin = isFinite(min) ? min : constants.INPUT_RANGE_MIN_VALUE
-  const valueMax = isFinite(max) ? max : constants.INPUT_RANGE_MAX_VALUE
-
+  const valueMin = array.reduce(getMax(minValue), constants.INPUT_RANGE_MIN_VALUE)
+  const valueMax = array.reduce(getMin(maxValue), constants.INPUT_RANGE_MAX_VALUE)
   console.log('array', array)
   console.log('valueMinF', valueMin)
   console.log('valueMaxF', valueMax)

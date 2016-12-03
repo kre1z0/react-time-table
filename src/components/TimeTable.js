@@ -12,7 +12,7 @@ import * as actions from '../actions/actions'
 // ↓ Константы ↓
 import * as constants from '../constants/timetable'
 
-class Timetable extends Component {
+class TimeTable extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -213,4 +213,4 @@ class Timetable extends Component {
   }
 }
 
-export default Timetable
+export default TimeTable
