@@ -12,7 +12,7 @@ Check demo <a href="https://kre1z0.github.io/table/" target='_blank'>here</a>
 
 <img src="./src/static/mobile.png" alt="mobile" />
 
-`desctop`
+`desktop`
 
 <img src="./src/static/desctop.png" alt="mobile" />
 
