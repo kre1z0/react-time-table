@@ -18,6 +18,7 @@
   "author": "Igor Ivchuk <thekreizo@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "classnames": "^2.2.5",
     "moment": "^2.6.0",
     "moment-timezone": "^0.5.9",
     "react": "^15.3.1",

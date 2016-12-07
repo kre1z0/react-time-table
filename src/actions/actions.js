@@ -60,6 +60,24 @@ export function getSchedulesFromServer() {
       console.log('parsing failed', error)
     })
 }
+export function deleteAllScheduleFromServer(deleted) {
+  console.log('deleteAllScheduleFromServer ---->', deleted)
+  const url = 'server'
+  fetch(url, {
+    method: 'post',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    },
+    body: 'foo=bar&lorem=ipsum',
+  })
+    .then(response => response.json())
+    .then((data) => {
+      console.log('Request succeeded with JSON response', data)
+    })
+    .catch((error) => {
+      console.log('Request failed', error)
+    })
+}
 
 export function deleteScheduleFromServer(id) {
   console.log('deleteScheduleFromServer ---->', id)

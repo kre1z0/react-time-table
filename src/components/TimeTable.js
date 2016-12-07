@@ -2,24 +2,25 @@ import React, { Component, PropTypes } from 'react'
 // http://momentjs.com/
 // http://momentjs.com/timezone/
 import moment from 'moment-timezone'
+// https://github.com/JedWatson/classnames
+import classNames from 'classnames'
 // https://facebook.github.io/react/docs/animation.html
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { Thead, WeekDays } from './Pure'
 import TimeZone from './TimeZone'
 import Popup from './Popup'
-// Actions
+// Actions     ↓
 import * as actions from '../actions/actions'
-// ↓ Константы ↓
+// Константы    ↓
 import * as constants from '../constants/timetable'
 
 class TimeTable extends Component {
   constructor(props) {
     super(props)
+    console.log('props', props)
     this.state = {
       schedules: [],
       popupIsOpen: false,
-      // ↓ не трогать этот стейт, он в componentWillUpdate ↓
-      disabled: true,
     }
     this.onClickSchedule = :: this.onClickSchedule
     this.onClickCreateNewSchedule = ::this.onClickCreateNewSchedule
@@ -31,11 +32,6 @@ class TimeTable extends Component {
 
   componentDidMount() {
     actions.getSchedulesFromServer().then(response => this.setState({ schedules: response }))
-  }
-  componentWillUpdate(newProps, newState) {
-    console.log('newProps')
-    const boolean = newState.schedules.length === 0
-    newState.disabled = boolean
   }
 
   onClickSchedule(item) {
@@ -61,19 +57,17 @@ class TimeTable extends Component {
   }
 
   onClickDeleteAllSchedules(deleted) {
-    const schedules = this.state.schedules
-    if (schedules.length > 0) {
-      const component = this.popup
-      component.setState({
-        deleteAllSchedules: true,
-        popupOpened: true,
-      })
-      if (deleted === true) {
-        this.setState({
-          schedules: [],
-        })
-      }
+    const state = this.state
+    const component = this.popup
+    const schedulesEmpty = state.schedules.length > 0
+    component.setState({
+      deleteAllSchedules: schedulesEmpty,
+      popupOpened: schedulesEmpty,
+    })
+    if (deleted === true) {
+      this.setState({ schedules: [] })
     }
+    actions.deleteAllScheduleFromServer(deleted)
   }
 
   onClickCreateNewSchedule(day, index) {
@@ -134,7 +128,7 @@ class TimeTable extends Component {
     const state = this.state
     console.log('STATE TIMETABLE --->', this.state)
     const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    const disabled = state.disabled ? 'button_out_of_call disabled' : 'button_out_of_call'
+    const buttonClass = classNames('btn_delete_all', { disabled: state.schedules.length === 0 })
     return (
       <div>
         <TimeZone />
@@ -142,7 +136,7 @@ class TimeTable extends Component {
           <div className='TableWidget' >
             <div className='timetable_header' >
               <h1>You what time for call?</h1>
-              <button onClick={this.onClickDeleteAllSchedules} className={disabled} type='button' >
+              <button onClick={this.onClickDeleteAllSchedules} className={buttonClass} type='button' >
                 Delete all
               </button>
               <div className='timetable_header-sub' >
