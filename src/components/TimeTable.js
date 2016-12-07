@@ -19,7 +19,7 @@ class TimeTable extends Component {
       schedules: [],
       popupIsOpen: false,
       // ↓ не трогать этот стейт, он в componentWillUpdate ↓
-      disabled: false,
+      disabled: true,
     }
     this.onClickSchedule = :: this.onClickSchedule
     this.onClickCreateNewSchedule = ::this.onClickCreateNewSchedule
@@ -28,16 +28,16 @@ class TimeTable extends Component {
     this.editSchedule = ::this.editSchedule
     this.createNewSchedule = ::this.createNewSchedule
   }
+
   componentDidMount() {
     actions.getSchedulesFromServer().then(response => this.setState({ schedules: response }))
   }
   componentWillUpdate(newProps, newState) {
-    if (newState.schedules.length > 0) {
-      newState.disabled = false
-    } else {
-      newState.disabled = true
-    }
+    console.log('newProps')
+    const boolean = newState.schedules.length === 0
+    newState.disabled = boolean
   }
+
   onClickSchedule(item) {
     console.log('onClickSchedule ---->', item)
     const component = this.popup
@@ -59,6 +59,7 @@ class TimeTable extends Component {
       },
     })
   }
+
   onClickDeleteAllSchedules(deleted) {
     const schedules = this.state.schedules
     if (schedules.length > 0) {
@@ -74,6 +75,7 @@ class TimeTable extends Component {
       }
     }
   }
+
   onClickCreateNewSchedule(day, index) {
     console.log('onClickCreateNewSchedule ---->', day, index * 2)
     const inputRange = index * constants.INPUT_RANGE
@@ -103,6 +105,7 @@ class TimeTable extends Component {
       },
     })
   }
+
   createNewSchedule(schedule) {
     console.log('_createNewSchedule ---->', schedule)
     const newSchedule = this.state.schedules.slice()
@@ -110,11 +113,13 @@ class TimeTable extends Component {
     this.setState({ schedules: newSchedule })
     actions.fetchNewSchedule(schedule)
   }
+
   deleteSchedule(id) {
     const deleteSchedule = this.state.schedules.filter(item => item.id !== id)
     this.setState({ schedules: deleteSchedule })
     actions.deleteScheduleFromServer(id)
   }
+
   editSchedule(item) {
     console.log('_editSchedule ---->', item)
     const state = this.state
@@ -124,6 +129,7 @@ class TimeTable extends Component {
     this.setState({ schedules: copyArray })
     actions.fetchEditscheduleFromServer(item)
   }
+
   render() {
     const state = this.state
     console.log('STATE TIMETABLE --->', this.state)
@@ -177,13 +183,13 @@ class TimeTable extends Component {
                       )
                     }
                     return (
-                      <div key={day}>
-                        <div className='mobile_week_day' key={`${day} mobile`}>
-                          <span className='line'>
+                      <div key={day} >
+                        <div className='mobile_week_day' key={`${day} mobile`} >
+                          <span className='line' >
                             {day}
                           </span>
                         </div>
-                        <div className='row'>
+                        <div className='row' >
                           <div className='cell' />
                           {cels}
                           <ReactCSSTransitionGroup
