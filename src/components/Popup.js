@@ -35,7 +35,7 @@ export default class Popup extends Component {
       editingSchedule: false,
       newSchedule: false,
       end_at: '',
-      id: 6,
+      id: 0,
       start_at: '',
       validationValues: {
         min: 0,

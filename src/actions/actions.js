@@ -1,7 +1,7 @@
-// ↓ http://momentjs.com/ ↓
-// ↓ http://momentjs.com/timezone/ ↓
+// http://momentjs.com/
+// http://momentjs.com/timezone/
 import moment from 'moment-timezone'
-// ↓ https://github.com/github/fetch ↓
+// https://github.com/github/fetch
 import 'whatwg-fetch'
 // ↓ Константы ↓
 import * as constants from '../constants/timetable'
@@ -168,7 +168,7 @@ export const getInputValuesForNew = (schedules, weekDay, index) => {
 // ↓ отдает объект из начального и конечного значения schedules ↓
 export const getInputValuesForEdit = (schedules, weekDay, id, minValue, maxValue) => {
   console.log('minValue', minValue)
-  console.log('minValue', maxValue)
+  console.log('maxValue', maxValue)
   const array = []
   schedules.forEach((item) => {
     if (item.weekDay === weekDay && item.id !== id) {

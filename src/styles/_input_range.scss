@@ -31,14 +31,14 @@
   border-radius: 100%;
   cursor: pointer;
   display: block;
-  height: 1rem;
-  margin-left: -0.5rem;
-  margin-top: -0.65rem;
+  height: 1.6rem;
+  margin-left: -0.8rem;
+  margin-top: -0.95rem;
   outline: none;
   position: absolute;
   top: 50%;
   transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-  width: 1rem;
+  width: 1.6rem;
 }
 
 .InputRange-slider:active {
@@ -66,11 +66,12 @@
   color: #aaaaaa;
   font-size: 0.8rem;
   white-space: nowrap;
+  display: none;
 }
 
 .InputRange-label--min,
 .InputRange-label--max {
-  bottom: -1.4rem;
+  bottom: 0;
   position: absolute;
 }
 
@@ -90,7 +91,7 @@
 .InputRange-labelContainer {
   left: -50%;
   position: relative;
-  opacity: 0; // hide
+  display: none;
 }
 
 .InputRange-label--max .InputRange-labelContainer {
@@ -120,7 +121,7 @@
 }
 
 .InputRange-track--active {
-  background: $green;
+  background: darken($green, 4%);
 }
 
 .InputRange {

@@ -1,4 +1,6 @@
 import React from 'react'
+// https://github.com/JedWatson/classnames
+import classNames from 'classnames'
 
 export const WeekDays = () => {
   const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -17,14 +19,17 @@ export const WeekDays = () => {
   )
 }
 
-export const Thead = () => {
+export const Thead = (state) => {
+  console.log('Thead', state)
   const celsAM = []
   const celsPM = []
   const cellsAmount = 13
   for (let i = 1; i < cellsAmount; i += 1) {
-    celsAM.push(<span className='cell' key={`${i}${'AM'}`}>{i}
+    const hoveredClassAM = classNames('cell', { hovered: state.indexSchedule === i })
+    const hoveredClassPM = classNames('cell', { hovered: state.indexSchedule === i + 12 })
+    celsAM.push(<span className={hoveredClassAM} key={`${i}${'AM'}`}>{i}
       <span className='header_scale'>AM</span></span>)
-    celsPM.push(<span className='cell' key={`${i}${'PM'}`}>{i}
+    celsPM.push(<span className={hoveredClassPM} key={`${i}${'PM'}`}>{i}
       <span className='header_scale'>PM</span></span>)
   }
   return (

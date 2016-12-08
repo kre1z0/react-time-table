@@ -17,7 +17,6 @@ import * as constants from '../constants/timetable'
 class TimeTable extends Component {
   constructor(props) {
     super(props)
-    console.log('props', props)
     this.state = {
       schedules: [],
       popupIsOpen: false,
@@ -48,6 +47,7 @@ class TimeTable extends Component {
       weekDay: item.weekDay,
       popupOpened: true,
       editingSchedule: true,
+      indexSchedule: 0,
       validationValues,
       values: {
         min: item.values.min,
@@ -100,12 +100,16 @@ class TimeTable extends Component {
     })
   }
 
-  createNewSchedule(schedule) {
-    console.log('_createNewSchedule ---->', schedule)
-    const newSchedule = this.state.schedules.slice()
-    newSchedule.unshift(schedule)
-    this.setState({ schedules: newSchedule })
-    actions.fetchNewSchedule(schedule)
+  onMouseEnterSchedule(index) {
+    this.setState({
+      indexSchedule: index,
+    })
+  }
+
+  onMouseLeaveSchedule() {
+    this.setState({
+      indexSchedule: null,
+    })
   }
 
   deleteSchedule(id) {
@@ -114,8 +118,16 @@ class TimeTable extends Component {
     actions.deleteScheduleFromServer(id)
   }
 
+  createNewSchedule(schedule) {
+    console.log('createNewSchedule ---->', schedule)
+    const newSchedule = this.state.schedules.slice()
+    newSchedule.unshift(schedule)
+    this.setState({ schedules: newSchedule })
+    actions.fetchNewSchedule(schedule)
+  }
+
   editSchedule(item) {
-    console.log('_editSchedule ---->', item)
+    console.log('editSchedule ---->', item)
     const state = this.state
     const prewStateArray = state.schedules.filter(obj => obj.id !== item.id)
     const copyArray = prewStateArray.slice()
@@ -146,7 +158,7 @@ class TimeTable extends Component {
             <div className='time_table_body' >
               <WeekDays />
               <div className='table-flex' >
-                <Thead />
+                <Thead {...this.state} />
                 {
                   weekdays.map((day) => {
                     const cels = []
@@ -171,7 +183,10 @@ class TimeTable extends Component {
                     })
                     for (let i = 1; i < cellsAmount; i += 1) {
                       cels.push(
-                        <div className='cell' key={`${day}${i}`} onClick={() => this.onClickCreateNewSchedule(day, i)} >
+                        <div className='cell' key={`${day}${i}`} onClick={() => this.onClickCreateNewSchedule(day, i)}
+                          onMouseEnter={() => this.onMouseEnterSchedule(i)}
+                          onMouseLeave={this.onMouseLeaveSchedule}
+                        >
                           <span className='circle' />
                         </div>,
                       )
