@@ -20,6 +20,7 @@ class TimeTable extends Component {
     this.state = {
       schedules: [],
       popupIsOpen: false,
+      indexSchedule: 0,
     }
     this.onClickSchedule = :: this.onClickSchedule
     this.onClickCreateNewSchedule = ::this.onClickCreateNewSchedule
@@ -27,6 +28,7 @@ class TimeTable extends Component {
     this.deleteSchedule = ::this.deleteSchedule
     this.editSchedule = ::this.editSchedule
     this.createNewSchedule = ::this.createNewSchedule
+    this.onMouseLeaveSchedule = ::this.onMouseLeaveSchedule
   }
 
   componentDidMount() {
@@ -47,7 +49,6 @@ class TimeTable extends Component {
       weekDay: item.weekDay,
       popupOpened: true,
       editingSchedule: true,
-      indexSchedule: 0,
       validationValues,
       values: {
         min: item.values.min,

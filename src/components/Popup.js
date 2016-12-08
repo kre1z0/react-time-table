@@ -134,7 +134,7 @@ export default class Popup extends Component {
   render() {
     const state = this.state
     console.log('STATE POPUP --->', state)
-    const popUpClass = state.popupOpened ? 'popup popup__opened' : 'popup'
+    const popUpClass = classNames('popup', { popup__opened: state.popupOpened })
     let deleteAll
     let newSchedule
     let editSchedule
