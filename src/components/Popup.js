@@ -9,8 +9,11 @@ import ClickOutside from 'react-click-outside'
 import moment from 'moment-timezone'
 // https://github.com/davidchin/react-input-range
 import InputRange from 'react-input-range'
+// https://github.com/JedWatson/classnames
+import classNames from 'classnames'
+// Actions      ↓
 import { getScheduleStyle } from '../actions/actions'
-// ↓ Константы ↓
+// Константы    ↓
 import * as constants from '../constants/timetable'
 
 export default class Popup extends Component {

@@ -1,6 +1,6 @@
 ##react-widget-scheduler
 
-Adaptive widget "Schedule for week" 
+Adaptive `react` widget "Schedule for week" 
 
 ##Demo
 
