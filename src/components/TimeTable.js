@@ -20,7 +20,7 @@ class TimeTable extends Component {
     this.state = {
       schedules: [],
       popupIsOpen: false,
-      indexSchedule: 0,
+      indexSchedule: null,
     }
     this.onClickSchedule = :: this.onClickSchedule
     this.onClickCreateNewSchedule = ::this.onClickCreateNewSchedule

@@ -2,12 +2,21 @@
 
 @media (max-width: $sm-min) {
   .TableWidget {
+    width: 100%;
+  }
+}
+
+@media (max-width: $xs-min) {
+  .TableWidget {
     margin: 0 auto;
     padding: 10px 15px;
     width: 100%;
     max-width: $sm-min - 10px;
     .week_days_block {
       display: none;
+    }
+    .time_table_body {
+      width: 100%;
     }
     .table-flex {
       width: 100%;
@@ -45,10 +54,16 @@
   }
   .table_time_wrapper {
     .timetable_header-sub h4 {
-      padding: 10px 0;
+      padding: 0;
     }
     .timetable_header{
       padding: 0;
+      .btn_delete_all {
+        padding: 0 20px;
+        display: block;
+        float: none;
+        margin: 0 auto 15px auto;
+      }
       h1 {
         display: block;
         transform: none;
@@ -110,5 +125,3 @@
     padding: 0 10px;
   }
 }
-
-

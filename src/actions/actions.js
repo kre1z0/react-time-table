@@ -35,7 +35,6 @@ export function getInputRange(start, end) {
 // ♰ нужно сделать валидацию на сервере что бы отправляло только дату с днями текущей недели  ♰
 export function getSchedulesFromServer() {
   const url = './json/schedules.json'
-  const formatDate = window.innerWidth < 767 === true ? 'h:mm' : constants.FORMAT_DATES
   return fetch(url)
     .then(response => response.json())
     .then((schedules) => {
@@ -47,8 +46,8 @@ export function getSchedulesFromServer() {
 
         const schedule = {
           id: itemId,
-          start_at: moment(item.start_at).format(formatDate),
-          end_at: moment(item.end_at).format(formatDate),
+          start_at: moment(item.start_at).format(constants.FORMAT_DATES),
+          end_at: moment(item.end_at).format(constants.FORMAT_DATES),
           weekDay: moment(item.start_at).format('dddd'),
           values,
           schedulesStyle,
