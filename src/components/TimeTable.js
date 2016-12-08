@@ -101,9 +101,11 @@ class TimeTable extends Component {
   }
 
   onMouseEnterSchedule(index) {
-    this.setState({
-      indexSchedule: index,
-    })
+    if (window.innerWidth > 767) {
+      this.setState({
+        indexSchedule: index,
+      })
+    }
   }
 
   onMouseLeaveSchedule() {
