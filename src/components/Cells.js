@@ -11,22 +11,12 @@ class Cells extends Component {
   static propTypes = {
     schedules: PropTypes.array,
     day: PropTypes.string,
-    onMouseEnterSchedule: PropTypes.func,
-    onMouseLeaveSchedule: PropTypes.func,
     onClickCreateNewSchedule: PropTypes.func,
     hour: PropTypes.number,
   }
   constructor(props) {
     super(props)
     this.onClickCreateNewSchedule = this.onClickCreateNewSchedule.bind(this)
-    this.onMouseEnterSchedule = this.onMouseEnterSchedule.bind(this)
-    this.onMouseLeaveSchedule = this.onMouseLeaveSchedule.bind(this)
-  }
-  onMouseEnterSchedule() {
-    this.props.onMouseEnterSchedule(this.props.hour)
-  }
-  onMouseLeaveSchedule() {
-    this.props.onMouseLeaveSchedule(null)
   }
   onClickCreateNewSchedule() {
     const inputRange = this.props.hour * constants.INPUT_RANGE
@@ -52,13 +42,8 @@ class Cells extends Component {
     this.props.onClickCreateNewSchedule(schedule)
   }
   render() {
-    console.log('props', this.props.hour)
     return (
-      <div className='cell'
-        onClick={this.onClickCreateNewSchedule}
-        onMouseEnter={this.onMouseEnterSchedule}
-        onMouseLeave={this.onMouseLeaveSchedule}
-      >
+      <div className='cell' onClick={this.onClickCreateNewSchedule} >
         <span className='circle' />
       </div>
     )

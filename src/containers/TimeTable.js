@@ -12,6 +12,8 @@ import Cells from '../components/Cells'
 import Popup from '../components/Popup'
 // Actions     ↓
 import * as actions from '../actions/actions'
+// Константы    ↓
+import * as constants from '../constants/timetable'
 
 class TimeTable extends Component {
   constructor(props) {
@@ -20,7 +22,6 @@ class TimeTable extends Component {
       schedules: [],
       weekdays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
       popupIsOpen: false,
-      indexSchedule: 0,
     }
     this.onClickSchedule = this.onClickSchedule.bind(this)
     this.onClickCreateNewSchedule = this.onClickCreateNewSchedule.bind(this)
@@ -28,8 +29,6 @@ class TimeTable extends Component {
     this.deleteSchedule = this.deleteSchedule.bind(this)
     this.editSchedule = this.editSchedule.bind(this)
     this.createNewSchedule = this.createNewSchedule.bind(this)
-    this.onMouseLeaveSchedule = this.onMouseLeaveSchedule.bind(this)
-    this.onMouseEnterSchedule = this.onMouseEnterSchedule.bind(this)
   }
 
   componentDidMount() {
@@ -59,21 +58,6 @@ class TimeTable extends Component {
     const component = this.popup
     component.setState(schedule)
   }
-
-  onMouseEnterSchedule(index) {
-    if (window.innerWidth > 767) {
-      this.setState({
-        indexSchedule: index,
-      })
-    }
-  }
-
-  onMouseLeaveSchedule(nix) {
-    this.setState({
-      indexSchedule: nix,
-    })
-  }
-
   deleteSchedule(id) {
     const deleteSchedule = this.state.schedules.filter(item => item.id !== id)
     this.setState({ schedules: deleteSchedule })
@@ -119,12 +103,10 @@ class TimeTable extends Component {
             <div className='time_table_body' >
               <WeekDays weekdays={state.weekdays} />
               <div className='table-flex' >
-                <Thead {...this.state} />
+                <Thead />
                 {
                   state.weekdays.map((day) => {
                     const schedule = []
-                    const cells = []
-                    const cellsAmount = 25
                     state.schedules.forEach((item) => {
                       if (item.weekDay === day) {
                         schedule.push(
@@ -137,19 +119,13 @@ class TimeTable extends Component {
                         )
                       }
                     })
-                    for (let i = 1; i < cellsAmount; i += 1) {
-                      cells.push(
-                        <Cells
-                          onClickCreateNewSchedule={this.onClickCreateNewSchedule}
-                          onMouseEnterSchedule={this.onMouseEnterSchedule}
-                          onMouseLeaveSchedule={this.onMouseLeaveSchedule}
-                          schedules={state.schedules}
-                          key={shortid.generate()}
-                          day={day}
-                          hour={i}
-                        />,
-                      )
-                    }
+                    const cells = Array.from({ length: constants.HOURS_PER_DAY }, (_, i) => <Cells
+                      onClickCreateNewSchedule={this.onClickCreateNewSchedule}
+                      schedules={state.schedules}
+                      key={shortid.generate()}
+                      day={day}
+                      hour={i + 1}
+                    />)
                     return (
                       <div key={day} >
                         <div className='mobile_week_day' key={`${day} mobile`} >

@@ -1,4 +1,5 @@
 export const HALF_HOUR = 60000 * 30
+export const HOURS_PER_DAY = 24
 export const INPUT_RANGE = 2
 export const START_OF_THE_DAY = 0
 export const INPUT_RANGE_MAX_VALUE = 48
