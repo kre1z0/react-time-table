@@ -143,15 +143,17 @@ body {
       }
       .cell {
         width: calc(100% / 25);
-        height: 20px;
+        height: 100%;
         transition: all 0.7s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         .circle {
           transition: transform 0.4s ease;
           width: 10px;
           height: 10px;
           border-radius: 50%;
           background-color: $gray;
-          display: inline-block;
         }
         &.hovered {
           color: darken($gray, 44%);
@@ -171,6 +173,7 @@ body {
       }
       &.header {
         .cell {
+          display: block;
           cursor: default;
         }
         .header_scale {

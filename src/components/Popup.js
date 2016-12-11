@@ -11,8 +11,8 @@ import moment from 'moment-timezone'
 import InputRange from 'react-input-range'
 // https://github.com/JedWatson/classnames
 import classNames from 'classnames'
-// Actions      ↓
-import { getScheduleStyle } from '../actions/actions'
+// Actions     ↓
+import * as actions from '../actions/actions'
 // Константы    ↓
 import * as constants from '../constants/timetable'
 
@@ -99,7 +99,7 @@ export default class Popup extends Component {
     const state = this.state
     if (this.state.editingSchedule === true) {
       const object = this.state.values
-      const schedulesStyle = getScheduleStyle(object)
+      const schedulesStyle = actions.getScheduleStyle(object)
       const item = {
         id: state.id,
         weekDay: state.weekDay,
@@ -115,7 +115,7 @@ export default class Popup extends Component {
     }
     if (this.state.newSchedule === true) {
       const object = this.state.values
-      const schedulesStyle = getScheduleStyle(object)
+      const schedulesStyle = actions.getScheduleStyle(object)
       const item = {
         id: shortid.generate(),
         weekDay: state.weekDay,
@@ -133,7 +133,6 @@ export default class Popup extends Component {
   }
   render() {
     const state = this.state
-    console.log('STATE POPUP --->', state)
     const popUpClass = classNames('popup', { popup__opened: state.popupOpened })
     let deleteAll
     let newSchedule

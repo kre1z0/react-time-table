@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import TimeTable from './components/TimeTable'
+import TimeTable from './containers/TimeTable'
 import './styles/base.scss'
 
 ReactDOM.render(
